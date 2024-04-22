@@ -6,6 +6,9 @@ import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import EmojiPicker from "./components/EmojiPicker";
 import EmojiList from "./components/EmojiList";
+import CircleButton from "./components/CircleButton";
+import IconButton from "./components/IconButton";
+import EmojiSticker from "./components/EmojiSticker";
 //
 const placeholderImage = require("./sticker-smash-assets/assets/images/background-image.png");
 
@@ -49,6 +52,9 @@ export default function App() {
           placeholderImageSource={placeholderImage}
           selectedImage={selectedImage}
         />
+        {pickedEmoji && (
+          <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />
+        )}
       </View>
       {showAppOptions ? (
         <View style={styles.optionsContainer}>
@@ -66,11 +72,16 @@ export default function App() {
         <View style={styles.footerContainer}>
           <Button
             theme="primary"
-            label="Choose a photo"
-            onPress={pickImageAsync}
+            label="choose"
+            onPress={() => {
+              console.log("button");
+            }}
+            pickImage={pickImageAsync}
           />
           <Button
             label="Use this photo"
+            theme=""
+            pickImage={pickImageAsync}
             onPress={() => setShowAppOptions(true)}
           />
         </View>
